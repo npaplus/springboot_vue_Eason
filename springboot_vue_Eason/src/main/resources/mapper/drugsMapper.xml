@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.eason.dao.DrugMapper">
+    <resultMap id="druginfor" type="com.qf.eason.pojo.Druginfor">
+        <id column="tb_druginfor_id" property="drugId"></id>
+        <result column="tb_druginfor_name" property="drugName"></result>
+        <result column="tb_druginfor_standard" property="drugStandard"></result>
+        <result column="tb_druginfor_img" property="drugImg"></result>
+        <result column="tb_druginfor_price" property="drugPrice"></result>
+        <result column="tb_druginfor_element" property="drugElement"></result>
+        <result column="tb_druginfor_function" property="drugFunction"></result>
+        <result column="tb_druginfor_usage" property="drugUsage"></result>
+    </resultMap>
+    <select id="findall" resultMap="druginfor">
+        select * from tb_druginfor
+    </select>
+    <select id="findallbyid" parameterType="int" resultMap="druginfor">
+        select * from tb_druginfor where tb_druginfor_id=#{drugid}
+    </select>
+</mapper>
