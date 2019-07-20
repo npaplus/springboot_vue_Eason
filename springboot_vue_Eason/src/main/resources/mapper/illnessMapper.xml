@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.eason.dao.IllnessMapper">
+    <resultMap id="illness" type="com.qf.eason.pojo.Illness">
+        <id column="tb_illness_id" property="nesId"></id>
+        <result column="tb_illness_name" property="nesName"></result>
+        <result column="tb_illness_crowd" property="nesCrowd"></result>
+    </resultMap>
+
+    <select id="findByNesCrowd" resultMap="illness" parameterType="String">
+        select tb_illness_name from tb_illness where tb_illness_crowd=#{nesCrowd}
+    </select>
+</mapper>
