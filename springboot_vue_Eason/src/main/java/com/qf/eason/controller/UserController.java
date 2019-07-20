@@ -1,5 +1,8 @@
 package com.qf.eason.controller;
 
+import com.aliyuncs.exceptions.ClientException;
+import com.qf.eason.config.DuanXinYZ;
+import com.qf.eason.config.YanZhengCode;
 import com.qf.eason.pojo.User;
 import com.qf.eason.response.QueryResponseResult;
 import com.qf.eason.service.UserServcie;
@@ -33,7 +36,6 @@ public class UserController {
     }
 
     //user登录
-    @ResponseBody
     @RequestMapping(value = "/loadUser",method = RequestMethod.GET)
     @ApiOperation(value = "用户登录",notes = "text：成功返回1")
     public int loadUser(User user){
@@ -44,9 +46,16 @@ public class UserController {
             return 0;
         }
     }
-
+//短信验证
+    @RequestMapping(value = "/yanzheng",method = RequestMethod.GET)
+    @ApiOperation(value = "短信验证")
+    public int yanzheng(String num) throws ClientException {
+        String newcode = YanZhengCode.getNewcode();
+        int i = DuanXinYZ.faSong(num, newcode);
+        return i;
+    }
      //user注册
-    @ResponseBody
+
     @RequestMapping(value = "/registerUser",method = RequestMethod.POST)
     @ApiOperation(value = "注册用户",notes = "text:成功返回1")
     // 设置两个参数，让其昵称默认等于手机号码
@@ -85,7 +94,7 @@ public class UserController {
 
 
     // 根据id修改用户昵称
-    @ResponseBody
+
     @RequestMapping(value = "/updateNickname",method = RequestMethod.POST)
     @ApiOperation(value = "根据id修改用户昵称",notes = "text:成功返回1")
     public int updateNickname(Integer id,String userNickname){
@@ -97,7 +106,7 @@ public class UserController {
     }
 
     // 根据id修改用户图片
-    @ResponseBody
+
     @RequestMapping(value = "updateImg",method = RequestMethod.POST)
     @ApiOperation(value = "根据id修改用户图片",notes = "texr:成功返回1")
     public int updateImg(Integer id,String userImg){
@@ -109,7 +118,7 @@ public class UserController {
     }
 
     // 根据id和密码(旧)修改用户密码(新)
-    @ResponseBody
+
     @RequestMapping(value = "updatePassword",method = RequestMethod.POST)
     @ApiOperation(value = "修改用户密码",notes = "txet:成功返回1")
     public int updatePassword(Integer userId,String userPassword,String newPassWord){
@@ -120,7 +129,7 @@ public class UserController {
         return bool?1:0;
     }
 
-    @ResponseBody
+
     @RequestMapping(value = "updatePhone",method = RequestMethod.POST)
     @ApiOperation(value = "根据id修改手机号",notes = "texr:成功返回1")
     // 根据id修改手机号
