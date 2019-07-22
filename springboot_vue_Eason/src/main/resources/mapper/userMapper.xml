@@ -1,0 +1,77 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.eason.dao.UserMapper">
+
+    <resultMap id="user" type="com.qf.eason.pojo.User">
+        <id column="tb_user_id" property="userId"></id>
+        <result column="tb_user_nickname" property="userNickname"></result>
+        <result column="tb_user_phone" property="userPhone"></result>
+        <result column="tb_user_password" property="userPassword"></result>
+        <result column="tb_user_img" property="userImg"></result>
+    </resultMap>
+
+    <select id="findAll" resultMap="user">
+        SELECT * FROM tb_user
+    </select>
+    <!-- 用户登录 -->
+    <select id="loadUser" resultMap="user" parameterType="user">
+        select * from tb_user
+        <where>
+            tb_user_phone = #{userPhone} and tb_user_password = #{userPassword}
+        </where>
+    </select>
+
+    <!-- 注册用户 -->
+    <insert id="registerUser" parameterType="user">
+        insert into tb_user (tb_user_nickname,tb_user_phone,tb_user_password)values (#{userNickname},#{userPhone},#{userPassword})
+    </insert>
+
+    <!-- 根据id查找(修改用) -->
+    <select id="findById" resultMap="user" parameterType="Integer">
+        select * from tb_user
+        <where>
+            tb_user_id = #{userId}
+        </where>
+    </select>
+
+    <!-- 根据id修改用信息 -->
+    <update id="updateUser">
+        update tb_user set tb_user_nickname=#{userNickname},tb_user_phone=#{userPhone},tb_user_password=#{userPassword},tb_user_img=#{userImg}
+        <where>
+            tb_user_id = #{userId}
+        </where>
+    </update>
+
+    <!-- 根据id修改用户昵称 -->
+    <update id="updateNickname" parameterType="user">
+        update tb_user set tb_user_nickname=#{userNickname}
+        <where>
+            tb_user_id = #{userId}
+        </where>
+    </update>
+
+    <!-- 根据id修改用户图片 -->
+    <update id="updateImg" parameterType="user">
+        update tb_user set tb_user_img=#{userImg}
+        <where>
+            tb_user_id = #{userId}
+        </where>
+    </update>
+
+    <!-- 根据id和密码(旧)修改用户密码(新) -->
+    <update id="updatePassword" >
+        update tb_user set tb_user_password=#{newPassWord}
+        <where>
+            tb_user_id = #{userId} and tb_user_password=#{userPassword}
+        </where>
+    </update>
+
+    <!-- 根据id修改手机号-->
+    <update id="updatePhone" parameterType="user">
+        update tb_user set tb_user_phone = #{userPhone}
+        <where>
+            tb_user_id = #{userId}
+        </where>
+    </update>
+</mapper>

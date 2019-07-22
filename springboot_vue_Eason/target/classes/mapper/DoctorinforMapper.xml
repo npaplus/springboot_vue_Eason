@@ -1,0 +1,66 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.eason.dao.DoctorinforMapper">
+    <resultMap id="doctorinfor" type="com.qf.eason.pojo.Doctorinfor">
+        <id column="tb_doctorinfor_id" property="id"></id>
+        <result property="realaName" column="tb_doctorinfor_realname"></result>
+        <result property="phone" column="tb_doctorinfor_phone"></result>
+        <result property="email" column="tb_doctorinfor_email"></result> <!--//邮箱-->
+        <result property="hospital" column="tb_doctorinfor_hospital"></result> <!--;//医院名称-->
+        <result property="office" column="tb_doctorinfor_office"></result><!--;//科室-->
+        <result property="title" column="tb_doctorinfor_title"></result> <!--;//职称-->
+        <result property="officePhone" column="tb_doctorinfor_officephone"></result> <!--;//科室电话-->
+        <result property="adept" column="tb_doctorinfor_adept"></result> <!--;//擅长及诊所介绍-->
+        <result property="impSrc" column="tb_doctorinfor_img"></result> <!--;//图片地址-->
+        <result property="sendWord" column="tb_doctorinfor_sendword"></result> <!--;//医生寄语-->
+        <result property="hospiTaltype" column="tb_doctorinfor_hospitaltype"></result><!--;//医院类型-->
+        <result property="workTime" column="tb_doctorinfor_worktime"></result><!-- ;//从业时间-->
+        <result property="city" column="tb_doctorinfor_city"></result><!--;//所在省份-->
+        <result property="peopleNumint" column="tb_doctorinfor_peoplenum"></result><!--//咨询人数-->
+        <result property="goodRateint" column="tb_doctorinfor_goodrate"></result> <!--;//好评数-->
+        <result property="degreeint" column="tb_doctorinfor_degree"></result><!--;//同行认可-->
+        <result property="printreferint" column="tb_doctorinfor_printrefer"></result><!-- ;//图片咨询人数-->
+        <result property="phonereferint" column="tb_doctorinfor_phonerefer"></result><!-- ;//电话咨询人数-->
+        <result property="privatereferint" column="tb_doctorinfor_privaterefer"></result><!-- ;//私人医生价格-->
+        <result property="backyardint" column="tb_doctorinfor_backyard"></result> <!--;//院后指导价-->
+        <result property="honor" column="tb_doctorinfor_honor"></result> <!--;//学术荣誉-->
+    </resultMap>
+
+    <select id="findAll" resultMap="doctorinfor" parameterType="String">
+        SELECT * FROM tb_doctorinfor
+        <where>
+            tb_doctorinfor_realname like concat('%',#{temp},'%') or
+            <!--医生名字-->
+            tb_doctorinfor_office like concat('%',#{temp},'%') or
+            <!--科室-->
+            tb_doctorinfor_printrefer like concat('%',#{temp},'%') or
+            <!--擅长-->
+            tb_doctorinfor_adept like concat('%',#{temp},'%') or
+            <!--医院-->
+            tb_doctorinfor_city like concat('%',#{temp},'%')
+            <!--所在地址-->
+        </where>
+    </select>
+    
+    <select id="findById" resultMap="doctorinfor" parameterType="String">
+    SELECT * FROM tb_doctorinfor
+        <where>
+            tb_doctorinfor_id = #{id}
+        </where>
+    </select>
+
+    <select id="load" resultMap="doctorinfor">
+    SELECT * FROM tb_doctorinfor
+    </select>
+    <select id="find" resultMap="doctorinfor">
+        SELECT * FROM tb_doctorinfor
+        <where>
+            tb_doctorinfor_hospitaltype = #{hospital}
+        </where>
+    </select>
+    <select id="findOffice" resultType="String">
+        SELECT distinct tb_doctorinfor_office FROM tb_doctorinfor
+    </select>
+
+</mapper>
