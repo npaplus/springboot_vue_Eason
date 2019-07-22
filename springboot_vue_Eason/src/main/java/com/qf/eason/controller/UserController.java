@@ -6,13 +6,16 @@ import com.qf.eason.config.YanZhengCode;
 import com.qf.eason.pojo.User;
 import com.qf.eason.response.QueryResponseResult;
 import com.qf.eason.service.UserServcie;
+import com.qf.eason.utils.UploadUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -24,6 +27,8 @@ import java.util.List;
 @ResponseBody
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    private UploadUtils uploadUtils;
 
     @Autowired
     private UserServcie userServcie;
@@ -109,10 +114,14 @@ public class UserController {
 
     @RequestMapping(value = "updateImg",method = RequestMethod.POST)
     @ApiOperation(value = "根据id修改用户图片",notes = "texr:成功返回1")
-    public int updateImg(Integer id,String userImg){
+    public int updateImg(Integer id,@RequestParam("file")MultipartFile file){
+        String img=null;
+        if (file!=null&&!file.getOriginalFilename().equals("")){
+             img = uploadUtils.savePic(file);
+        }
         User user = new User();
         user.setUserId(id);
-        user.setUserImg(userImg);
+        user.setUserImg(img);
         boolean bool = userServcie.updateImg(user);
         return bool?1:0;
     }
