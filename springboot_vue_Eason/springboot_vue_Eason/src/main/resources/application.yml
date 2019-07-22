@@ -1,0 +1,20 @@
+server:
+  port: 8181
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.95.140.83:3306/eason?useUnicode=true&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password:
+  jpa:
+    database: MySQL
+    show-sql: true
+    #压制springboot启动时警告
+    open-in-view: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.qf.eason.pojo
