@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.eason.dao.LealthMapper">
+    <resultMap id="lealth" type="com.qf.eason.pojo.Lealth">
+        <id property="lealthId" column="tb_lealth_id"></id>
+        <result property="lealthName" column="tb_lealth_realname"></result>
+        <result property="lealthSex" column="tb_lealth_sex"></result>
+        <result property="lealthBirth" column="tb_lealth_birth"></result>
+        <result property="lealthHeight" column="tb_lealth_height"></result>
+        <result property="lealthWeight" column="tb_lealth_weight"></result>
+        <result property="lealthWaistline" column="tb_lealth_waistline"></result>
+    </resultMap>
+    <select id="findAll" resultMap="lealth">
+        select * from tb_lealth
+    </select>
+    <delete id="deleteById" parameterType="Integer">
+        delete from tb_lealth
+        <where>
+            tb_lealth_id=#{lealthId}
+        </where>
+    </delete>
+    <select id="findById" resultMap="lealth" parameterType="Integer">
+        select * from tb_lealth
+        <where>
+            tb_lealth_id=#{lealthId}
+        </where>
+    </select>
+    <update id="updataLerlth" parameterType="lealth">
+        update tb_lealth set tb_lealth_realname=#{lealthName},tb_lealth_sex=#{lealthSex},
+        tb_lealth_birth=#{lealthBirth},tb_lealth_height=#{lealthHeight},
+        tb_lealth_weight=#{lealthWeight},tb_lealth_waistline=#{lealthWaistline}
+        <where>
+            tb_lealth_id=#{lealthId}
+        </where>
+    </update>
+</mapper>

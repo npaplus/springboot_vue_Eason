@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.qf.eason.dao.SymptomMapper">
+    <resultMap id="symptom" type="com.qf.eason.pojo.Symptom">
+        <id column="tb_symptom_id" property="id"></id>
+        <result property="name" column="tb_symptom_name"></result>
+        <result column="tb_symptom_badyparts" property="badyParts"></result>
+        <result property="tb_symptom_percent" column="percent"></result>
+        <result column="symptoms1" property="symptoms1"></result>
+        <result property="tb_symptom_symptoms2" column="symptoms2"></result>
+        <result column="symptoms3" property="symptoms3"></result>
+    </resultMap>
+
+    <select id="findByBadyParts" resultMap="symptom" >
+        SELECT tb_symptom_id,tb_symptom_name from tb_symptom
+        <where>
+            tb_symptom_badyparts = #{badyParts}
+        </where>
+    </select>
+
+    <select id="findByName"  resultMap="symptom">
+        SELECT * from tb_symptom
+        <where>
+            tb_symptom_name = #{name}
+        </where>
+    </select>
+</mapper>

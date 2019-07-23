@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<style>
+	.tree li {
+        list-style-type: none;
+		cursor:pointer;
+	}
+	table tbody tr:nth-child(odd){background:#F4F4F4;}
+	table tbody td:nth-child(even){color:#C00;}
+	</style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div><a class="navbar-brand" style="font-size:32px;" href="#">Eason- 账号维护</a></div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li style="padding-top:8px;">
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
+					<i class="glyphicon glyphicon-user"></i><!--<td th:text="${session.anames}">张三</td>-->admin<span class="caret"></span>
+				  </button>
+					  <ul class="dropdown-menu" role="menu">
+						<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
+						<li class="divider"></li>
+						<li><a href="logins"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
+					  </ul>
+			    </div>
+			</li>
+            <li style="margin-left:10px;padding-top:8px;">
+				<button type="button" class="btn btn-default btn-danger">
+				  <span class="glyphicon glyphicon-question-sign"></span> 帮助
+				</button>
+			</li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+			<div class="tree">
+				<ul style="padding-left:0px;" class="list-group">
+					<li class="list-group-item tree-closed" >
+						<a href="users"><i class="glyphicon glyphicon-dashboard"></i> 控制面板</a>
+					</li>
+					<li class="list-group-item">
+						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span> 
+						<ul style="margin-top:10px;">
+							<li style="height:30px;">
+								<a href="users" style="color:red;"><i class="glyphicon glyphicon-user"></i>账户维护</a>
+							</li>
+							<li style="height:30px;">
+								<a href="roles"><i class="glyphicon glyphicon-king"></i> 健康维护</a>
+							</li>
+							<li style="height:30px;">
+								<a href="doctors"><i class="glyphicon glyphicon-lock"></i>医师维护</a>
+							</li>
+						</ul>
+					</li>
+				<!--	<li class="list-group-item tree-closed">
+						<span><i class="authCert"></i> 业务审核 <span class="badge" style="float:right">3</span></span>
+						<ul style="margin-top:10px;display:none;">
+							<li style="height:30px;">
+								<a href="authCert"><i class="glyphicon glyphicon-check"></i> 实名认证审核</a>
+							</li>
+							<li style="height:30px;">
+								<a href="auth_adv.html"><i class="glyphicon glyphicon-check"></i> 广告审核</a>
+							</li>
+							<li style="height:30px;">
+								<a href="auth_project.html"><i class="glyphicon glyphicon-check"></i> 项目审核</a> 
+							</li>
+						</ul>
+					</li>
+					<li class="list-group-item tree-closed">
+						<span><i class="glyphicon glyphicon-th-large"></i> 业务管理 <span class="badge" style="float:right">7</span></span> 
+						<ul style="margin-top:10px;display:none;">
+							<li style="height:30px;">
+								<a href="cert.html"><i class="glyphicon glyphicon-picture"></i> 资质维护</a> 
+							</li>
+							<li style="height:30px;">
+								<a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> 分类管理</a> 
+							</li>
+							<li style="height:30px;">
+								<a href="process.html"><i class="glyphicon glyphicon-random"></i> 流程管理</a> 
+							</li>
+							<li style="height:30px;">
+								<a href="advertisement.html"><i class="glyphicon glyphicon-hdd"></i> 广告管理</a> 
+							</li>
+							<li style="height:30px;">
+								<a href="message.html"><i class="glyphicon glyphicon-comment"></i> 消息模板</a> 
+							</li>
+							<li style="height:30px;">
+								<a href="project_types"><i class="glyphicon glyphicon-list"></i> 项目分类</a>
+							</li>
+							<li style="height:30px;">
+								<a href="tag.html"><i class="glyphicon glyphicon-tags"></i> 项目标签</a> 
+							</li>
+						</ul>
+					</li>
+					<li class="list-group-item tree-closed" >
+						<a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a> 
+					</li>-->
+				</ul>
+			</div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+				<h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
+			  </div>
+			  <div class="panel-body">
+<form action="chaxun" class="form-inline" role="form" style="float:left;">
+  <div class="form-group has-feedback">
+    <div class="input-group">
+      <div class="input-group-addon">查询条件</div>
+      <input class="form-control has-success" type="text" name="tiaoJian" placeholder="请输入查询条件">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+</form>
+<button type="button" class="btn btn-danger" id="remove" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+<button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='add.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+<br>
+ <hr style="clear:both;">
+          <div class="table-responsive">
+            <table class="table  table-bordered">
+              <thead>
+                <tr>
+                  <th width="30">#</th>
+				  <th width="30"><input type="checkbox"/></th>
+                  <th>昵称</th>
+                  <th>手机号</th>
+                  <th>密码</th>
+					<th>照片</th>
+                  <th width="100">操作</th>
+                </tr>
+              </thead>
+				<!-- private Integer userId;
+    private String userNickname;
+    private String userPhone;
+    private String userPassword;
+    private String userImg;-->
+              <tbody th:remove="all-but-first">
+                <tr th:id="'tr'+${userAlls.userId}" th:each="userAlls,userAllStat:${userAll}">
+                  <td th:text="${userAllStat.count}">1</td>
+				  <td><input type="checkbox" name="text1" th:id="${userAlls.userId}"/></td>
+                  <td th:text="${userAlls.userNickname}">Lorem</td>
+                  <td>********</td>
+                  <td th:text="${userAlls.userPassword}">dolor</td>
+                  <td th:src="${userAlls.userImg}">dolor</td>
+                  <td>
+				      <button th:id="${userAlls.userId}" type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
+				      <button th:id="${userAlls.userId}" type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
+					  <button th:id="${userAlls.userId}" type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
+				  </td>
+                </tr>
+                <tr>
+              </tbody>
+			  <tfoot>
+			     <tr >
+				     <td colspan="6" align="center">
+						<ul id="ul" class="pagination">
+								<li class="disabled"><a href="#">上一页</a></li>
+								<li class="active"><a href="#">1 <!--<span class="sr-only">(current)</span>--></a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">下一页</a></li>
+						</ul>
+					 </td>
+				 </tr>
+
+			  </tfoot>
+            </table>
+			  <input id="cp" type="hidden" th:value="${curentPage}"/>
+			  <input id="mp" type="hidden" th:value="${maxPage}"/>
+          </div>
+			  </div>
+			</div>
+        </div>
+      </div>
+    </div>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script/docs.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                //分页
+                var a=$("#ul li");
+                var cp=parseInt($("#cp").val());
+                var mp=parseInt($("#mp").val());
+                if(cp>0){
+                    var y = cp % 5;
+                    $.each(a, function (index) {
+                        a.eq(index).removeAttr("class");
+                    });
+                    for (var i = 1; i <= 5; i++) {
+                        if(y==0){
+                            a[i].firstChild.text = cp + i - y-5;
+                        }else{
+                            a[i].firstChild.text = cp + i - y;
+                        }
+                    }
+                    if (cp == 1) {
+                        a.eq(0).attr("class", "disabled");
+                    }
+                    if (cp == mp) {
+                        a.eq(6).attr("class", "disabled");
+                    }
+                    for(var i = 1; i <= 5; i++){
+                        var p=a[i].firstChild.text;
+                        if(p>mp){
+                            a.eq(i).attr("class", "disabled");
+                        }
+                    }
+                    if(y==0){
+                        a.eq(5).attr("class", "active");
+                    } else{
+                        a.eq(y).attr("class", "active");
+                    }
+                    var e=$("#ul li:not([class])");
+                    if(e.length>0){
+                        $.each(e,function (index) {
+                            e.eq(index).click(function () {
+                                var act=parseInt($(".active")[0].firstChild.text);
+                                var ss=this.firstChild.text;
+                                var self=parseInt(ss);
+                                if(ss=="上一页"){
+                                    location.href="users?page="+(act-1);
+                                }else if(ss=="下一页"){
+                                    location.href="users?page="+(act+1);
+                                }else{
+                                    location.href="users?page="+self;
+                                }
+                            })
+                        })
+                    }
+                }
+
+
+                //批量删除
+                $("#remove").click(function() {
+
+                  var box=document.getElementsByName("text1");
+                  var checkbox= new Array();
+                 for (var i=0;i<box.length;i++){
+                     if (box[i].checked==true){
+                         checkbox.push(box[i].id);
+
+                     }
+                 }
+                    var checkboxs=checkbox.toString();
+                     $.post("remove",{"checkboxs":checkboxs},function (data) {
+                            if (data==1){
+                            window.location.reload();
+                            }
+                        });
+                });
+
+			    $(".list-group-item").click(function(){
+				    if ( $(this).find("ul") ) {
+						$(this).toggleClass("tree-closed");
+						if ( $(this).hasClass("tree-closed") ) {
+							$("ul", this).hide("fast");
+						} else {
+							$("ul", this).show("fast");
+						}
+					}
+				});
+            });
+
+            $("tbody .btn-success").click(function(){
+                window.location.href = "assignRole.html";
+            });
+            //分配角色
+            $("tbody .btn-success").click(function(){
+                var aid=$(this).attr("id");
+                window.location.href = "findRole?aid="+aid;
+            });
+
+            /*修改*/
+            $("tbody .btn-primary").click(function(){
+                var aid=$(this).attr("id");
+                window.location.href = "edit?aid="+aid;
+            });
+            /*删除*/
+                $("tbody .btn-danger").click(function () {
+
+                    var aid=$(this).attr("id");
+                    var delTr=$("#tr"+aid);
+                    $.post("delete",{aids:aid},function (data) {
+                        if (data=="success"){
+                            delTr.remove();
+                        }
+                    });
+            });
+        </script>
+  </body>
+</html>
